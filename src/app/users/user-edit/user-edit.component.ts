@@ -42,7 +42,7 @@ export class UserEditComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.usr = this.user;
+   /*  this.usr = this.user; */
 
   }
 

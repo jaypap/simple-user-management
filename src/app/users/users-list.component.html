@@ -44,7 +44,7 @@
       </div>
       <div *ngIf="usersList && usersList.length > 0" class="row">
         <div class="col-12">
-          <div class="col-12 accordion-padding--bottom" *ngFor="let user of filteredUsers; let i = index"
+          <div class="col-12 accordion-padding--bottom" *ngFor="let user of filteredUsersList; let i = index"
             id="accordion{{i}}">
             <div class="card">
               <div class="card-header" id="heading{{i}}">

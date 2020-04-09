@@ -15,7 +15,7 @@ export class UserListComponent implements OnInit {
 
 
   public usersList: User[];
-  public filteredUsers: User[];
+  public filteredUsersList: User[];
   public user: User;
   public userCount: number;
   public visible: boolean;
@@ -28,8 +28,8 @@ export class UserListComponent implements OnInit {
 
   set usersListFilter(value: string) {
     this._usersListFilter = value;
-    this.filteredUsers = value ? this.performFilter(this.usersListFilter) : this.usersList;
-    this.userCount = this.filteredUsers.length;
+    this.filteredUsersList = value ? this.performFilter(this.usersListFilter) : this.usersList;
+    this.userCount = this.filteredUsersList.length;
   }
   // tslint:disable-next-line:variable-name
   constructor(private _userService: UserService) { }
@@ -45,16 +45,16 @@ export class UserListComponent implements OnInit {
     this.usersListFilter;
     this._userService.get('http://jsonplaceholder.typicode.com/users').subscribe((result) => {
       this.usersList = result;
-      this.filteredUsers = this.usersList;
+      this.filteredUsersList = this.usersList;
       this.userCount = this.usersList.length;
     });
   }
 
-  private performFilter(filterBy: string): User[] {
-    filterBy = filterBy.toLocaleLowerCase();
+  private performFilter(filterList: string): User[] {
+    filterList = filterList.toLocaleLowerCase();
     return this.usersList.filter((user: User) => {
       // tslint:disable-next-line:no-unused-expression
-      return user.name.toLocaleLowerCase().includes(filterBy);
+      return user.name.toLocaleLowerCase().includes(filterList);
     });
   }
 
@@ -62,7 +62,7 @@ export class UserListComponent implements OnInit {
     if (id === 0) {
       this.user = new User();
     } else {
-      this.user = this.usersList.find((usr) => usr.id === id);
+      this.user = this.filteredUsersList.find((usr) => usr.id === id);
     }
     if (this.user !== null && this.user !== undefined) {
       this.openClosePopUp(true);
@@ -75,21 +75,22 @@ export class UserListComponent implements OnInit {
 
   public add(user: User) {
     if (user.id === 0) {
-      this.user.id = this.filteredUsers.length + 1;
-      this.filteredUsers.push(this.user);
-      this.userCount = this.filteredUsers.length;
+      this.user.id = this.usersList.length + 1;
+      this.filteredUsersList.push(this.user);
+      this.usersList.push(this.user);
+      this.userCount = this.filteredUsersList.length;
     } else {
-      const index = this.filteredUsers.findIndex(usr => usr.id === user.id);
-      this.filteredUsers[index] = user;
+      const index = this.filteredUsersList.findIndex(usr => usr.id === user.id);
+      this.filteredUsersList[index] = user;
     }
     this.visible = false;
   }
 
   public delete(id) {
-    const index = this.filteredUsers.findIndex(usr => usr.id === id);
+    const index = this.filteredUsersList.findIndex(usr => usr.id === id);
     if (index > -1) {
-      this.filteredUsers.splice(index, 1);
-      this.userCount = this.filteredUsers.length;
+      this.filteredUsersList.splice(index, 1);
+      this.userCount = this.filteredUsersList.length;
     }
     this.visible = false;
 
