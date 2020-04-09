@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
   public usersList: User[];
   public filteredUsersList: User[];
   public user: User;
+  public userClone: User;
   public userCount: number;
   public visible: boolean;
   // tslint:disable-next-line:variable-name
@@ -28,7 +29,7 @@ export class UserListComponent implements OnInit {
 
   set usersListFilter(value: string) {
     this._usersListFilter = value;
-    this.filteredUsersList = value ? this.performFilter(this.usersListFilter) : this.usersList;
+    this.filteredUsersList =  this._usersListFilter ? this.performFilter(this.usersListFilter) : this.usersList;
     this.userCount = this.filteredUsersList.length;
   }
   // tslint:disable-next-line:variable-name
@@ -58,13 +59,15 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  public userPopUp(id: number) {
+  public getUser(id: number) {
     if (id === 0) {
-      this.user = new User();
+      this.userClone = this.user = new User();
+
     } else {
       this.user = this.filteredUsersList.find((usr) => usr.id === id);
+      this.userClone = Object.assign({}, this.user);
     }
-    if (this.user !== null && this.user !== undefined) {
+    if (this.userClone !== null && this.userClone !== undefined) {
       this.openClosePopUp(true);
     }
   }
@@ -75,9 +78,10 @@ export class UserListComponent implements OnInit {
 
   public add(user: User) {
     if (user.id === 0) {
-      this.user.id = this.usersList.length + 1;
-      this.filteredUsersList.push(this.user);
-      this.usersList.push(this.user);
+      user.id = this.usersList.length + 1;
+      this.filteredUsersList.length !== this.usersList.length ? this.filteredUsersList.push(user) : this.usersList.push(user);
+      /*  this.filteredUsersList.push(user);
+     this.usersList.push(user); */
       this.userCount = this.filteredUsersList.length;
     } else {
       const index = this.filteredUsersList.findIndex(usr => usr.id === user.id);
