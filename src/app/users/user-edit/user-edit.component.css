@@ -1,0 +1,18 @@
+/* Modal Content */
+
+#modalContent {
+    position: relative;
+    margin: 10% auto !important;
+    padding: 0;
+    width: 50%;
+    min-width: 255px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.margin-right-btn {
+    margin-right: 60px;
+}
+
+.form-group {
+    margin-left: -15px !important;
+}
