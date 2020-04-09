@@ -1,6 +1,6 @@
 <ng-container *ngIf="visible">
-    <div id="modalContent" class="modal-content">
-        <div class="">
+    <div id="modalContent" class="">
+        <div class="modal-content">
             <div class="">
                 <div class="modal-header ">
                     <h5 class="modal-title">Add Member</h5>
@@ -20,33 +20,42 @@
                                     <label>Email</label>
                                     <input type="email" [(ngModel)]="usr.email" name="useremail" class="form-control">
                                 </div>
+                                <div class="form-group col-6"></div>
+                                <!-- </div>
+                        <div class="col-12"> -->
                                 <h6 class="m-t-none m-b">Profile</h6>
                                 <hr />
                                 <div class="form-group col-8">
                                     <label>Street</label>
-                                    <input type="text" [(ngModel)]="usr.address.street" name="userstreet" class="form-control">
+                                    <input type="text" [(ngModel)]="usr.address.street" name="userstreet"
+                                        class="form-control">
                                 </div>
                                 <div class="form-group col-4">
                                     <label>Suite</label>
-                                    <input type="text" [(ngModel)]="usr.address.suite" name="usersuite" class="form-control">
+                                    <input type="text" [(ngModel)]="usr.address.suite" name="usersuite"
+                                        class="form-control">
                                 </div>
                                 <div class="form-group col-8">
                                     <label>City</label>
-                                    <input type="text" [(ngModel)]="usr.address.city" name="usercity" class="form-control">
+                                    <input type="text" [(ngModel)]="usr.address.city" name="usercity"
+                                        class="form-control">
                                 </div>
                                 <div class="form-group col-4">
                                     <label>Zipcode</label>
-                                    <input type="text" [(ngModel)]="usr.address.zipcode" name="userzipcode" class="form-control">
+                                    <input type="text" [(ngModel)]="usr.address.zipcode" name="userzipcode"
+                                        class="form-control">
                                 </div>
                                 <div>
                                     <button type="button" (click)="isVisible(false)"
                                         class="btn btn-outline-secondary float-left">Cancel</button>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary float-right" (click)="save(usr)" type="submit"><strong>ΟΚ</strong></button>
+                                    <button class="btn btn-primary float-right" (click)="save(usr)"
+                                        type="submit"><strong>ΟΚ</strong></button>
                                 </div>
                                 <div class="margin-right-btn">
-                                    <button type="button" (click)="deletion(usr.id)" class="btn btn-outline-danger float-right">Delete</button>
+                                    <button type="button" (click)="deletion(usr.id)"
+                                        class="btn btn-outline-danger float-right">Delete</button>
                                 </div>
                             </form>
                         </div>
