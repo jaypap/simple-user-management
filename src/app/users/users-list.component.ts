@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit {
 
   set usersListFilter(value: string) {
     this._usersListFilter = value;
-    this.filteredUsersList =  this._usersListFilter ? this.performFilter(this.usersListFilter) : this.usersList;
+    this.filteredUsersList = this._usersListFilter ? this.performFilter(this.usersListFilter) : this.usersList;
     this.userCount = this.filteredUsersList.length;
   }
   // tslint:disable-next-line:variable-name
@@ -65,7 +65,8 @@ export class UserListComponent implements OnInit {
 
     } else {
       this.user = this.filteredUsersList.find((usr) => usr.id === id);
-      this.userClone = Object.assign({}, this.user);
+      /* this.userClone = Object.assign({}, this.user); */
+      this.userClone = JSON.parse(JSON.stringify( this.user));
     }
     if (this.userClone !== null && this.userClone !== undefined) {
       this.openClosePopUp(true);
@@ -79,9 +80,12 @@ export class UserListComponent implements OnInit {
   public add(user: User) {
     if (user.id === 0) {
       user.id = this.usersList.length + 1;
-      this.filteredUsersList.length !== this.usersList.length ? this.filteredUsersList.push(user) : this.usersList.push(user);
-      /*  this.filteredUsersList.push(user);
-     this.usersList.push(user); */
+      if (this.filteredUsersList.length !== this.usersList.length) {
+        this.filteredUsersList.push(user);
+        this.usersList.push(user);
+      } else {
+        this.usersList.push(user);
+      }
       this.userCount = this.filteredUsersList.length;
     } else {
       const index = this.filteredUsersList.findIndex(usr => usr.id === user.id);
@@ -92,8 +96,10 @@ export class UserListComponent implements OnInit {
 
   public delete(id) {
     const index = this.filteredUsersList.findIndex(usr => usr.id === id);
+    const indx = this.usersList.findIndex(usr => usr.id === id);
     if (index > -1) {
       this.filteredUsersList.splice(index, 1);
+      this.usersList.splice(indx, 1);
       this.userCount = this.filteredUsersList.length;
     }
     this.visible = false;
