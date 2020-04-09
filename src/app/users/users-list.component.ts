@@ -75,7 +75,9 @@ export class UserListComponent implements OnInit {
 
   public add(user: User) {
     if (user.id === 0) {
+      this.user.id = this.filteredUsers.length + 1;
       this.filteredUsers.push(this.user);
+      this.userCount = this.filteredUsers.length;
     } else {
       const index = this.filteredUsers.findIndex(usr => usr.id === user.id);
       this.filteredUsers[index] = user;
@@ -87,6 +89,9 @@ export class UserListComponent implements OnInit {
     const index = this.filteredUsers.findIndex(usr => usr.id === id);
     if (index > -1) {
       this.filteredUsers.splice(index, 1);
+      this.userCount = this.filteredUsers.length;
     }
+    this.visible = false;
+
   }
 }

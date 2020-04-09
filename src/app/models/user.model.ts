@@ -15,5 +15,8 @@ export class User {
     public company: Company;
 
     constructor() {
+        this.id = 0;
+        this.address = new Address();
+        this.geo = new Geo();
     }
 }
