@@ -30,9 +30,9 @@ export class UserListComponent implements OnInit {
 
   set usersListFilter(value: string) {
     this._usersListFilter = value;
-     this.usersList= this._usersListFilter ? this.getfiltered (this.usersListFilter) : this.usersList;
+    this.filteredUsersList = this._usersListFilter ? this.getfiltered(this.usersListFilter) : this.usersList;
     this.userCount = this.filteredUsersList.length;
-  } 
+  }
 
   constructor(private _userService: UserService) { }
 
@@ -43,19 +43,19 @@ export class UserListComponent implements OnInit {
 
 
   public getRequestResults(): void {
-    this.usersListFilter; 
+    this.usersListFilter;
     this._userService.get(this._url).subscribe((result) => {
       this.filteredUsersList = this.usersList = result;
       this.userCount = this.usersList.length;
     });
   }
 
-  private getfiltered (filterList: string): User[] {
+  private getfiltered(filterList: string): User[] {
     filterList = filterList.toLocaleLowerCase();
     return this.usersList.filter((user: User) => {
       return user.name.toLocaleLowerCase().includes(filterList);
     });
-  } 
+  }
 
   /* private getfiltered(filterList: string): User[] {
     filterList = filterList.toLocaleLowerCase();

@@ -31,7 +31,7 @@ export class UserService {
     //   headers: new HttpHeaders()
     // };
     // options.params = Object.assign(params);
-    return this.httpClient.get(url).pipe(delay(500));
+    return this.httpClient.get(url);
   }
 
 
