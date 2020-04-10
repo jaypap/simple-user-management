@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 // Components
 
-import { UserListComponent } from './users-list.component';
+import { UserListComponent } from './users-list/users-list.component';
 import { UserService } from '../services/users.service';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { usersRoutes } from './users.routes';

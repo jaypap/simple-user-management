@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 // Models
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 // Services
-import { UserService } from '../services/users.service';
+import { UserService } from '../../services/users.service';
+
 
 @Component({
   selector: 'app-user',
@@ -20,8 +21,8 @@ export class UserListComponent implements OnInit {
   public userClone: User;
   public userCount: number;
   public visible: boolean;
-  // tslint:disable-next-line:variable-name
   private _usersListFilter: string;
+  private _url: string = 'http://jsonplaceholder.typicode.com/users';
 
   get usersListFilter(): string {
     return this._usersListFilter;
@@ -29,10 +30,10 @@ export class UserListComponent implements OnInit {
 
   set usersListFilter(value: string) {
     this._usersListFilter = value;
-    this.filteredUsersList = this._usersListFilter ? this.performFilter(this.usersListFilter) : this.usersList;
+     this.usersList= this._usersListFilter ? this.getfiltered (this.usersListFilter) : this.usersList;
     this.userCount = this.filteredUsersList.length;
-  }
-  // tslint:disable-next-line:variable-name
+  } 
+
   constructor(private _userService: UserService) { }
 
   ngOnInit() {
@@ -42,31 +43,40 @@ export class UserListComponent implements OnInit {
 
 
   public getRequestResults(): void {
-    // tslint:disable-next-line:no-unused-expression
-    this.usersListFilter;
-    this._userService.get('http://jsonplaceholder.typicode.com/users').subscribe((result) => {
-      this.usersList = result;
-      this.filteredUsersList = this.usersList;
+    this.usersListFilter; 
+    this._userService.get(this._url).subscribe((result) => {
+      this.filteredUsersList = this.usersList = result;
       this.userCount = this.usersList.length;
     });
   }
 
-  private performFilter(filterList: string): User[] {
+  private getfiltered (filterList: string): User[] {
     filterList = filterList.toLocaleLowerCase();
     return this.usersList.filter((user: User) => {
-      // tslint:disable-next-line:no-unused-expression
       return user.name.toLocaleLowerCase().includes(filterList);
     });
-  }
+  } 
+
+  /* private getfiltered(filterList: string): User[] {
+    filterList = filterList.toLocaleLowerCase();
+    return this.usersList.filter((user: User) => {
+      user.name.toLocaleLowerCase().includes(filterList)
+      if (this.usersList && this.usersList.length >0) {
+        return this.usersList;;
+      } else {
+        return this.getRequestResults();
+      }
+
+    });
+  } */
 
   public getUser(id: number) {
     if (id === 0) {
-      this.userClone = this.user = new User();
+      this.userClone = new User();
 
     } else {
       this.user = this.filteredUsersList.find((usr) => usr.id === id);
-      /* this.userClone = Object.assign({}, this.user); */
-      this.userClone = JSON.parse(JSON.stringify( this.user));
+      this.userClone = JSON.parse(JSON.stringify(this.user));
     }
     if (this.userClone !== null && this.userClone !== undefined) {
       this.openClosePopUp(true);
@@ -79,6 +89,7 @@ export class UserListComponent implements OnInit {
 
   public add(user: User) {
     if (user.id === 0) {
+      /* user.id = Math.max.apply(Math, this.usersList.map((o) => { return o.y; })) */
       user.id = this.usersList.length + 1;
       if (this.filteredUsersList.length !== this.usersList.length) {
         this.filteredUsersList.push(user);
