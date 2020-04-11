@@ -20,29 +20,14 @@ export class UserEditComponent implements OnInit, OnChanges {
   @Output() public delete = new EventEmitter<any>();
   @Output() public openClosePopUp = new EventEmitter<any>();
   public usr: User;
-  // tslint:disable-next-line:variable-name
-  constructor(/* private route: ActivatedRoute, private _userService: UserService */) { }
+
+  constructor() { }
 
   ngOnInit() {
-    /* this.route.params.subscribe((params) => {
-      const id = + params.id;
-      if (id !== 0) {
-        this._userService.get('http://jsonplaceholder.typicode.com/users').subscribe((result) => {
-          this.usersList = result;
-          if (result && result.length > 0) {
-            this.user = this.usersList.find((usr) => usr.id === id);
-            this.visible = true;
-          }
-        });
-      } else {
-        this.user = new User();
-        this.visible = true;
-      }
-    }); */
+
   }
 
   ngOnChanges() {
-   /*  this.usr = this.user; */
 
   }
 

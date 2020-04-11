@@ -23,6 +23,11 @@ export class UserListComponent implements OnInit {
   public visible: boolean;
   public rowsCollapsed: false[] = new Array();
   public faIconShow: string = "plus";
+  public latitude: string;
+  public longitude: string;
+  public lat: number = -23.8779431;
+  public lng: number = -49.8046873;
+  public showMap: boolean = false;
   private _usersListFilter: string;
   private _url: string = 'http://jsonplaceholder.typicode.com/users';
 
@@ -43,7 +48,6 @@ export class UserListComponent implements OnInit {
     this.getRequestResults();
   }
 
-
   public getRequestResults(): void {
     this.usersListFilter;
     this._userService.get(this._url).subscribe((result) => {
@@ -52,26 +56,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  private getfiltered(filterList: string): User[] {
-    filterList = filterList.toLocaleLowerCase();
-    return this.usersList.filter((user: User) => {
-      return user.name.toLocaleLowerCase().includes(filterList);
-    });
-  }
-
-  /* private getfiltered(filterList: string): User[] {
-    filterList = filterList.toLocaleLowerCase();
-    return this.usersList.filter((user: User) => {
-      user.name.toLocaleLowerCase().includes(filterList)
-      if (this.usersList && this.usersList.length >0) {
-        return this.usersList;;
-      } else {
-        return this.getRequestResults();
-      }
-
-    });
-  } */
-
   public getUser(id: number) {
     if (id === 0) {
       this.userClone = new User();
@@ -79,19 +63,32 @@ export class UserListComponent implements OnInit {
     } else {
       this.user = this.filteredUsersList.find((usr) => usr.id === id);
       this.userClone = JSON.parse(JSON.stringify(this.user));
+      this.latitude = this.user.geo.lat;
+      this.longitude = this.user.geo.lng
     }
     if (this.userClone !== null && this.userClone !== undefined) {
       this.openClosePopUp(true);
     }
   }
 
-  public openClosePopUp(isVisible) {
+  public openClosePopUp(isVisible: boolean) {
     this.visible = isVisible;
+  }
+
+  public openCloseMapPopUp(isVisible: boolean) {
+    this.showMap = isVisible;
   }
 
   public openCloseRows(state: boolean) {
     state = !state;
     state === true ? this.faIconShow = "plus" : this.faIconShow = "minus";
+  }
+
+  public userCoordinates() {
+
+    /* if (this.latitude !== null && this.latitude !== undefined && this.longitude !== null && this.latitude !== null) { */
+      this.openCloseMapPopUp(true);
+   /*  } */
   }
 
   public add(user: User) {
@@ -122,5 +119,13 @@ export class UserListComponent implements OnInit {
     }
     this.visible = false;
 
+  }
+
+
+  private getfiltered(filterList: string): User[] {
+    filterList = filterList.toLocaleLowerCase();
+    return this.usersList.filter((user: User) => {
+      return user.name.toLocaleLowerCase().includes(filterList);
+    });
   }
 }

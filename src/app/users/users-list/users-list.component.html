@@ -66,11 +66,13 @@
                     </a>
                   </small>
                   <br />
-                  <small class="text-muted  margin-left-items"><span>{{user.address.street}},
-                      {{user.address.suite}}</span></small>
+                  <small class="text-muted  margin-left-items">
+                    <span>{{user.address.street}}, {{user.address.suite}}</span>
+                  </small>
                   <br />
-                  <small class="text-muted margin-left-items"><span>{{user.address.zipcode}},
-                      {{user.address.city}}</span></small>
+                  <span class="text-muted margin-left-items"><span>{{user.address.zipcode}},
+                      {{user.address.city}} <a class="link-color" type="button" data-toggle="tooltip" data-placement="top" title="see user location" (click)="userCoordinates()"> <span class="turn-icon-90">&#8888;</span></a> </span>
+                  </span>
                 </ng-template>
               </ngb-panel>
 
@@ -84,6 +86,8 @@
   </div>
 </div>
 
-<!--Popup-->
+<!--PopupUser-->
 <app-user-edit [user]="userClone" [visible]="visible" (openClosePopUp)="openClosePopUp($event)" (add)="add($event)"
   (delete)="delete($event)"></app-user-edit>
+
+<app-user-location [latitude]="latitude" [longitude]="longitude" [showMap]="showMap" (openCloseMapPopUp)="openCloseMapPopUp($event)"></app-user-location>
