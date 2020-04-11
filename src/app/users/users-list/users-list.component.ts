@@ -21,6 +21,8 @@ export class UserListComponent implements OnInit {
   public userClone: User;
   public userCount: number;
   public visible: boolean;
+  public rowsCollapsed: false[] = new Array();
+  public faIconShow: string = "plus";
   private _usersListFilter: string;
   private _url: string = 'http://jsonplaceholder.typicode.com/users';
 
@@ -85,6 +87,11 @@ export class UserListComponent implements OnInit {
 
   public openClosePopUp(isVisible) {
     this.visible = isVisible;
+  }
+
+  public openCloseRows(state: boolean) {
+    state = !state;
+    state === true ? this.faIconShow = "plus" : this.faIconShow = "minus";
   }
 
   public add(user: User) {

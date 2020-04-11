@@ -30,8 +30,8 @@
 
 }
 
-.onHover-color:hover{
-    color:dodgerblue;
+.onHover-color:hover {
+    color: dodgerblue;
 }
 
 .margin-top--40px {
@@ -42,3 +42,13 @@
     margin-top: 50px;
     margin-bottom: 28px;
 }
+
+/* ::ng-deep .my-accordion .card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2s;
+}
+
+::ng-deep.collapse.show {
+    max-height: 5em;
+} */

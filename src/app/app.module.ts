@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { UserModule } from './users/users.module';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
+
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import { routes } from './app.routes';
     BrowserModule,
     UserModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(routes, {
       useHash: true
     })

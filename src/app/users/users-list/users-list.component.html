@@ -10,8 +10,8 @@
               Team Members
             </a>
             <form class="form-inline">
-<!--               <button type="button" class="btn btn-outline-primary" [routerLink]="['edit/', 0]">ADD MEMBER</button>
--->              <button type="button" (click)="getUser(0)" class="btn btn-outline-primary">ADD MEMBER</button>
+              <!--               <button type="button" class="btn btn-outline-primary" [routerLink]="['edit/', 0]">ADD MEMBER</button>
+--> <button type="button" (click)="getUser(0)" class="btn btn-outline-primary">ADD MEMBER</button>
             </form>
           </nav>
         </div>
@@ -44,48 +44,39 @@
       </div>
       <div *ngIf="usersList && usersList.length > 0" class="row">
         <div class="col-12">
-          <div class="col-12 accordion-padding--bottom" *ngFor="let user of filteredUsersList; let i = index"
-            id="accordion{{i}}">
-            <div class="card">
-              <div class="card-header" id="heading{{i}}">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapse'+i"
-                    aria-expanded="true" [attr.aria-controls]="'collapse'+i">
-                    {{user.name}}
-                  </button>
-                </h5>
-              </div>
-
-              <div id="collapse{{i}}" class="collapse" [attr.aria-labelledby]="'heading'+i"
-                [attr.data-parent]="'#accordion'+ i">
-                <div class="card-body">
+          <div class="col-12">
+            <ngb-accordion closeOthers="true " destroyOnHide="false">
+              <ngb-panel id="static-{{i}}" class="col-12 accordion-padding--bottom"
+                *ngFor="let user of filteredUsersList; let i = index">
+                <ng-template ngbPanelTitle>
+                  <span class="">{{user.name}}</span>
+                </ng-template>
+                <ng-template ngbPanelContent>
                   <span class="img-position">
                     <a href="#" class="float-left">
                       <img alt="image" class="rounded-circle" width="70px" src="./assets/img/user.jpg">
                     </a>
                   </span>
-
-                  <div class="media-body">
-                    <a type="button" (click)="getUser(user.id)" class="float-right onHover-color">
-                      <small>[Edit]</small>
+                  <a type="button" (click)="getUser(user.id)" class="float-right onHover-color">
+                    <small>[Edit]</small>
+                  </a>
+                  <small class="margin-left-items">
+                    <a href="#" class="link-color">
+                      {{user.email}}
                     </a>
-                    <small class="margin-left-items">
-                      <a href="#" class="link-color">
-                        {{user.email}}
-                      </a>
-                    </small>
-                    <br />
-                    <small class="text-muted  margin-left-items"><span>{{user.address.street}},
-                        {{user.address.suite}}</span></small>
-                    <br />
-                    <small class="text-muted margin-left-items"><span>{{user.address.zipcode}},
-                        {{user.address.city}}</span></small>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </small>
+                  <br />
+                  <small class="text-muted  margin-left-items"><span>{{user.address.street}},
+                      {{user.address.suite}}</span></small>
+                  <br />
+                  <small class="text-muted margin-left-items"><span>{{user.address.zipcode}},
+                      {{user.address.city}}</span></small>
+                </ng-template>
+              </ngb-panel>
 
+            </ngb-accordion>
           </div>
+
         </div>
 
       </div>
@@ -94,4 +85,5 @@
 </div>
 
 <!--Popup-->
-<app-user-edit [user]="userClone" [visible]="visible" (openClosePopUp)="openClosePopUp($event)" (add)="add($event)" (delete)="delete($event)"></app-user-edit>
+<app-user-edit [user]="userClone" [visible]="visible" (openClosePopUp)="openClosePopUp($event)" (add)="add($event)"
+  (delete)="delete($event)"></app-user-edit>

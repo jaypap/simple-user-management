@@ -9,6 +9,7 @@ import { UserService } from '../services/users.service';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { usersRoutes } from './users.routes';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 export const myDeclarations = [UserListComponent, UserEditComponent];
@@ -16,6 +17,7 @@ export const myDeclarations = [UserListComponent, UserEditComponent];
 export const myImports = [
     CommonModule,
     FormsModule,
+    NgbModule,
     RouterModule.forChild(usersRoutes),
 ];
 
