@@ -6,16 +6,13 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 
 export const usersRoutes: Routes = [
     {
+        /* /users url path  */
         path: 'users',
         children: [
             {
                 path: '',
                 component: UserListComponent
             }
-           /*  {
-                path: 'edit/:id',
-                component: UserEditComponent
-            } */
         ]
     }
 ];

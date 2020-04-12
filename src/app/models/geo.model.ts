@@ -4,6 +4,7 @@ export class Geo {
     public lng: string;
 
     constructor() {
+
     }
 
 }

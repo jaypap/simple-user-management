@@ -1,93 +1,98 @@
 <div>
-  <div class="">
-    <span class="col-12 top-span"></span>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 margin-top--40px">
-          <nav class="navbar">
-            <a class="navbar-brand" href="#">
-              <img src="./assets/img/logo.png" alt="image" class="inline-block">
-              Team Members
-            </a>
-            <form class="form-inline">
-              <!--               <button type="button" class="btn btn-outline-primary" [routerLink]="['edit/', 0]">ADD MEMBER</button>
---> <button type="button" (click)="getUser(0)" class="btn btn-outline-primary">ADD MEMBER</button>
-            </form>
-          </nav>
-        </div>
-      </div>
-      <div class="row margin-top-bottom">
-        <div class="col-7">
-          <div class="col-12">
-            <!-- Search form -->
-            <form class="">
-              <input class="form-control" name="username" [(ngModel)]="usersListFilter" type="text" placeholder="Search"
-                aria-label="Search">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </form>
-          </div>
-        </div>
-        <div class="col-5">
-          <div class="col-12">
-            <div class="float-right">
-              <h3>{{userCount}} People</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="!usersList || usersList.length === 0">
-        <div class="d-flex   justify-content-center">
-          <div class="spinner-border text-info" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="usersList && usersList.length > 0" class="row">
-        <div class="col-12">
-          <div class="col-12">
-            <ngb-accordion closeOthers="true " destroyOnHide="false">
-              <ngb-panel id="static-{{i}}" class="col-12 accordion-padding--bottom"
-                *ngFor="let user of filteredUsersList; let i = index">
-                <ng-template ngbPanelTitle>
-                  <span class="">{{user.name}}</span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                  <span class="img-position">
-                    <a href="#" class="float-left">
-                      <img alt="image" class="rounded-circle" width="70px" src="./assets/img/user.jpg">
-                    </a>
-                  </span>
-                  <a type="button" (click)="getUser(user.id)" class="float-right onHover-color">
-                    <small>[Edit]</small>
-                  </a>
-                  <small class="margin-left-items">
-                    <a href="#" class="link-color">
-                      {{user.email}}
-                    </a>
-                  </small>
-                  <br />
-                  <small class="text-muted  margin-left-items">
-                    <span>{{user.address.street}}, {{user.address.suite}}</span>
-                  </small>
-                  <br />
-                  <span class="text-muted margin-left-items"><span>{{user.address.zipcode}},
-                      {{user.address.city}} <a class="link-color" type="button" data-toggle="tooltip" data-placement="top" title="see user location" (click)="userCoordinates()"> <span class="turn-icon-90">&#8888;</span></a> </span>
-                  </span>
-                </ng-template>
-              </ngb-panel>
 
-            </ngb-accordion>
-          </div>
-
-        </div>
-
+  <span class="col-12 top-span"></span>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 margin-top--40px">
+        <nav class="navbar">
+          <a class="navbar-brand" href="#">
+            <img src="./assets/img/logo.png" alt="image" class="inline-block">
+            Team Members
+          </a>
+          <form class="form-inline">
+            <button type="button" (click)="getUser(0)" class="btn btn-outline-primary">ADD MEMBER</button>
+          </form>
+        </nav>
       </div>
     </div>
+    <div class="row margin-top-bottom">
+      <div class="col-7">
+        <div class="col-12">
+          <!-- Search form -->
+          <form class="">
+            <input class="form-control" name="username" [(ngModel)]="usersListFilter" type="text" placeholder="Search"
+              aria-label="Search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </form>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="col-12">
+          <div *ngIf="usersList && usersList.length > 0" class="float-right">
+            <h3>{{filteredUsersList.length}} People</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- If not user list show sprinner -->
+    <div *ngIf="!usersList || usersList.length === 0">
+      <div class="d-flex   justify-content-center">
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <!-- if user list show accordion -->
+    <div *ngIf="usersList && usersList.length > 0" class="row">
+      <div class="col-12">
+        <div class="col-12">
+          <ngb-accordion closeOthers="true " destroyOnHide="false">
+            <ngb-panel id="static-{{i}}" class="col-12 accordion-padding--bottom"
+              *ngFor="let user of filteredUsersList; let i = index">
+              <ng-template ngbPanelTitle>
+                <span class="">{{user.name}}</span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <span class="img-position">
+                  <a href="#" class="float-left">
+                    <img alt="image" class="rounded-circle" width="70px" src="./assets/img/user.jpg">
+                  </a>
+                </span>
+                <a type="button" (click)="getUser(user.id)" class="float-right onHover-color">
+                  <small>[Edit]</small>
+                </a>
+                <small class="margin-left-items">
+                  <a href="#" class="link-color">
+                    {{user.email}}
+                  </a>
+                </small>
+                <br />
+                <small class="text-muted  margin-left-items">
+                  <span>{{user.address.street}}, {{user.address.suite}}</span>
+                </small>
+                <br />
+                <span class="text-muted margin-left-items"><span>{{user.address.zipcode}},
+                    {{user.address.city}}<a class="link-color turn-icon-90" type="button" data-toggle="tooltip"
+                      data-placement="top" title="see user location" (click)="userCoordinates(user.id)">&#8888;</a>
+                  </span>
+                </span>
+              </ng-template>
+            </ngb-panel>
+
+          </ngb-accordion>
+        </div>
+      </div>
+    </div>
+    <!--  -->
   </div>
 </div>
+
 
 <!--PopupUser-->
 <app-user-edit [user]="userClone" [visible]="visible" (openClosePopUp)="openClosePopUp($event)" (add)="add($event)"
   (delete)="delete($event)"></app-user-edit>
 
-<app-user-location [latitude]="latitude" [longitude]="longitude" [showMap]="showMap" (openCloseMapPopUp)="openCloseMapPopUp($event)"></app-user-location>
+  <!-- Google Maps Popup -->
+<app-user-location [latitude]="latitude" [longitude]="longitude" [showMap]="showMap"
+  (openCloseMapPopUp)="openCloseMapPopUp($event)"></app-user-location>

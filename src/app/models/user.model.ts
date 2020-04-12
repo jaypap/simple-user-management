@@ -1,5 +1,4 @@
 
-import { Geo } from './geo.model';
 import { Address } from './address.model';
 import { Company } from './company.model';
 
@@ -9,7 +8,6 @@ export class User {
     public username: number;
     public email: string;
     public address: Address;
-    public geo: Geo;
     public phone: string;
     public website: string;
     public company: Company;
@@ -17,6 +15,5 @@ export class User {
     constructor() {
         this.id = 0;
         this.address = new Address();
-        this.geo = new Geo();
     }
 }

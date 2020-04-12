@@ -3,19 +3,17 @@
 }
 
 .navbar-brand {
-    /*   padding-top: 5px; */
+
     color: lightgray;
     font-weight: 350 !important;
 
 }
 
+/* color for links */
 .link-color {
     color: dodgerblue;
 }
 
-.accordion-padding--bottom {
-    padding-bottom: 4px;
-}
 
 .margin-left-items {
     margin-left: 3px;
@@ -43,21 +41,20 @@
     margin-bottom: 28px;
 }
 
-/* .turn-icon-90{
-    font-size:100px;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-} */
+.turn-icon-90 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
 
-/* ::ng-deep .my-accordion .card-body {
-    max-height: 0;
-    overflow: hidden;
+/* ::ng-deep .accordion .card {
+
     transition: max-height 2s;
 }
 
 ::ng-deep.collapse.show {
-    max-height: 5em;
-} */
+    max-height: 100%;
+    transition: max-height 2s;
+}  */
